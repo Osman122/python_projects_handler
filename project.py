@@ -39,40 +39,35 @@ class Project:
         file.close()             
 
 def register_user():
-        first_name = input("Enter your first name: ")
-        last_name = input("Enter your last name: ")
-        email = input("Enter your email address: ")
-        password = getpass.getpass("Enter your password: ")
-        confirm_password = getpass.getpass("Confirm your password: ")
-        mobile_phone = input("Enter your mobile phone number: ")
-
-        #name validation
+        first_name = input("Enter your first name: ")  #name validation
         if not re.match(r'^[a-zA-Z_]', first_name):
             print("enter valid name")
-            return
+            return 
+        last_name = input("Enter your last name: ")
         if not re.match(r'^[a-zA-Z_]', last_name):
             print("enter valid name")
-            return
-        
-
-
-
+            return 
+        email = input("Enter your email address: ")
         # Validate email format
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
             print("Invalid email address format.")
             return
-        
-        
 
-        # Validate password match
-        if password != confirm_password:
+        password = getpass.getpass("Enter your password: ")
+        confirm_password = getpass.getpass("Confirm your password: ")
+         # Validate password match
+        while password != confirm_password:
             print("Passwords do not match.")
-            return
+            confirm_password = getpass.getpass("Confirm your password: ")
+               
+        mobile_phone = input("Enter your mobile phone number: ")
 
         # Validate Egyptian phone number format (e.g., +0xxxxxxxxx)
-        if not re.match(r'^(010|011|012|015)[0-9]{8}$', mobile_phone):
+        while not re.match(r'^(010|011|012|015)[0-9]{8}$', mobile_phone):
             print("Invalid Egyptian phone number format.")
-            return
+
+        
+        
 
         # Save user registration data to storage (e.g., file or database)
         
@@ -85,7 +80,7 @@ def register_user():
         newuser=User(first_name,last_name,email,password,mobile_phone)
         newuser.user_add()
         print("Registration successful!")
-
+        return main_menu()
 
 # User login
 def login_user():
@@ -225,7 +220,7 @@ def search(project_date,current_user):
 def main_menu():
     load_project()
     load()
-    printuser()
+    #printuser()
    
     
     print("Welcome to the Fundraising Console App!")
