@@ -215,6 +215,12 @@ def delete_project(project_name,current_user):
             return main_menu
     
     return main_menu
+
+def search(project_date,current_user):
+    print(f"user name is ({current_user})")
+    if current_user=="":
+    
+        print("please log in first")
 # Main menu
 def main_menu():
     load_project()
